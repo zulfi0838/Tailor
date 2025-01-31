@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repair Tailor</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/repair.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+   <nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+        <i class="fa-solid fa-bars"></i>
+    </label>
+    <label class="Logo">CusHit</label>
+    <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="create.html">Create</a></li>
+        <li><a class="active" href="repair.html">Repair</a></li>
+        <li><a href="#">Login</a></li>
+    </ul>
+   </nav>
+
+   <div class="container">
+        <div class="service-section">
+            <h2>Perbaikan Pakaian</h2>
+            <div class="service-cards">
+                <div class="service-card">
+                    <h3>Hitung Harga Perbaikan Pakaian</h3>
+                    <form method="POST">
+                        <label for="duration">Durasi Pengerjaan (jam):</label>
+                        <input type="number" id="duration" name="duration" step="0.1" required>
+                        
+                        <label for="difficulty">Tingkat Kesulitan:</label>
+                        <select id="difficulty" name="difficulty">
+                            <option value="mudah">Mudah</option>
+                            <option value="sedang">Sedang</option>
+                            <option value="sulit">Sulit</option>
+                        </select>
+                        
+                        <button type="submit">Hitung</button>
+                    </form>
+
+                    <div class="result">
+                        <h2>Total Harga: Rp<span id="price">0</span></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+
+   <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let duration = parseFloat(document.getElementById("duration").value);
+            let difficulty = document.getElementById("difficulty").value;
+
+            let basePrice = 10000; // Harga dasar per jam
+            let multiplier = difficulty === "mudah" ? 1 : difficulty === "sedang" ? 1.5 : 2;
+            let totalPrice = duration * basePrice * multiplier;
+
+            document.getElementById("price").innerText = totalPrice.toLocaleString("id-ID");
+        });
+   </script>
+</body>
+</html>
